@@ -1,0 +1,108 @@
+---------------------------------
+query getAllUsers {
+  users {
+    _id,
+    name
+  }
+}
+
+
+------------------------------
+query getAllQuotes {
+  quotes { 
+    by
+    text
+    _id
+  }
+}
+
+
+
+--------------------------
+query getAllUsersWithQuotes {
+  users {
+    _id,
+    name,
+    quotes{
+      _id
+      text
+      by
+    }
+  }
+}
+
+-------------------------
+query getUserBYId{
+  user(_id:"3"){
+    quotes {
+      by
+      text
+    }
+    name
+  }
+}
+
+
+
+------------------------------
+query getUserBYId($userId:ID!){
+  user(_id:$userId){
+    quotes {
+      by
+      text
+    }
+    name
+  }
+}
+
+
+-------------------------------
+query getQuotesByUserId {
+  quote(by:"1"){
+    text
+    by
+  }
+}
+
+
+
+---------------------------------
+query getQuotesByUserId($userId:ID!) {
+  quote(by:$userId){
+    text
+    by
+  }
+}
+
+
+
+
+
+-------------------------------------
+mutation createUser($data:UserInput!){
+  user:signupUserDummy(userNew:$data){
+    name
+    email
+}
+}
+
+//body
+{"data" :{"name":"kirssti gupta","email":"kirtigupta@gmail.com","password":"1234"}}
+
+
+
+
+----------------------------------
+mutation SignInUser($data: UserSigninInput!){
+    user:signinUser(userSignin: $data) {
+      token
+
+    }
+}
+//body
+{
+  "data": {"email" : "kirtigupta@gmail.com","password":"1234"}
+}
+
+
+
